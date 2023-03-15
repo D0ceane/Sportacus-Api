@@ -18,16 +18,16 @@ class User
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $first_name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $last_name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $password = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -39,7 +39,7 @@ class User
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profile_picture = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $is_active = null;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Party::class)]

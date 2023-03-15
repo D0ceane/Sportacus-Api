@@ -20,7 +20,7 @@ class Sport
     #[ORM\Column(length: 255)]
     private ?string $name_sport = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: (50))]
     private ?string $type_sport = null;
 
     #[ORM\Column(nullable: true)]
