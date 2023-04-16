@@ -1,0 +1,7 @@
+App\Entity\Sport:
+  sport_{1..100}:
+    nameSport: <sentence(3)>
+    typeSport: <sentence(1)>
+    playerMaxSport: <numberBetween(1, 25)>
+    createdAtSport: <dateTime()>
+    updatedAtSport: <dateTime()>
