@@ -1,0 +1,16 @@
+App\Entity\PlaceApi:
+  placeApi_{1..50}:
+    installationNumber: <numberBetween(1, 30)>
+    installationName: <sentence(1)>
+    adresse: <sentence(3)>
+    postalCode: <numberBetween(10000, 99000)>
+    commune: <sentence(3)>
+    accessibleInstallationToPeopleWithDisabilities: <numberBetween(0, 1)>
+    numberOfEquipmentInInstallation: <numberBetween(1, 50)>
+    numberOfParkingSpaces: <numberBetween(0, 30)>
+    numberOfParkingSpacesForPeopleWithDisabilities: <numberBetween(1, 50)>
+    equipmentName: <sentence(2)>
+    coordgpsx: <numberBetween(1, 50)>
+    coordgpsy: <numberBetween(1, 50)>
+    freeAccessEquipment: <numberBetween(0, 1)>
+    orderToOpenToThePublic: <numberBetween(0, 1)>
