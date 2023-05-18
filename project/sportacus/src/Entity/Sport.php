@@ -23,29 +23,55 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     description: 'Sport Model',
     operations: [
-        new GetCollection(uriTemplate: '/sports'),
+        new GetCollection(
+            uriTemplate: '/sports',
+            normalizationContext: [
+                'groups' => ['read:Sport:collection'],
+                'openapi_definition_name' => 'Read Collection'
+            ],
+        ),
         new Get(
             uriTemplate: '/sports/{id}',
-            normalizationContext: ['groups' => 'read:Sport:item', 'openapi_definition_name' => 'Read Item']
+            normalizationContext: [
+                'groups' => ['read:Sport:item'],
+                'openapi_definition_name' => 'Read Item']
         ),
         new Post(
-            uriTemplate: '/created-sport',
+            uriTemplate: '/sports',
+            denormalizationContext: [
+                'groups' => ['write:Sport:item'],
+                'openapi_definition_name' => 'Write Item'
+            ],
         ),
         new Put(
             uriTemplate: '/manage-sport',
+            normalizationContext: [
+                'groups' => ['read:Sport:item'],
+                'openapi_definition_name' => 'Read Collection'
+            ],
+            denormalizationContext: [
+                'groups' => ['write:Sport:item'],
+                'openapi_definition_name' => 'Write Item'
+            ],
         ),
         new Patch(
             uriTemplate: '/updated-sport/{id}',
+            normalizationContext: [
+                'groups' => ['read:Sport:item'],
+                'openapi_definition_name' => 'Read Collection'
+            ],
+            denormalizationContext: [
+                'groups' => ['write:Sport:item'],
+                'openapi_definition_name' => 'Write Item'
+            ],
         ),
-        new Delete(uriTemplate: '/deleted-sport/{id}'),
-    ],
-    normalizationContext: [
-        'groups' => ['read:Sport:collection'],
-        'openapi_definition_name' => 'Read Collection'
-        ],
-    denormalizationContext: [
-        'groups' => ['write:Sport:item'],
-        'openapi_definition_name' => 'Write Item'
+        new Delete(
+            uriTemplate: '/deleted-sport/{id}',
+            denormalizationContext: [
+                'groups' => ['write:Sport:item'],
+                'openapi_definition_name' => 'Write Item'
+            ],
+        ),
     ],
     paginationClientItemsPerPage: true,
     paginationItemsPerPage: 1,
@@ -60,13 +86,11 @@ use Symfony\Component\Validator\Constraints as Assert;
         'updatedAtSport' => 'partial'
     ]
 )]
-
 class Sport
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read:Sport:collection', 'read:Sport:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -107,16 +131,21 @@ class Sport
     private ?int $playerMaxSport = null;
 
     #[
-        Groups(['read:Sport:collection', 'read:Sport:item', 'write:Sport:item'])
+        Groups(['read:Sport:item', 'write:Sport:item'])
     ]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAtSport = null;
 
-    #[
-        Groups(['read:Sport:collection', 'read:Sport:item', 'write:Sport:item'])
-    ]
+    #[Groups(['read:Sport:item', 'write:Sport:item'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updatedAtSport = null;
+
+    #[Groups(['read:Sport:item', 'write:Sport:item'])]
+    #[
+        ORM\ManyToOne(inversedBy: 'sport'),
+        ORM\JoinColumn(nullable: true)
+    ]
+    private ?Practising $practising = null;
 
 
     public function getId(): ?int
@@ -181,6 +210,18 @@ class Sport
     public function setUpdatedAtSport(\DateTimeInterface $updatedAtSport): self
     {
         $this->updatedAtSport = $updatedAtSport;
+
+        return $this;
+    }
+
+    public function getPractising(): ?Practising
+    {
+        return $this->practising;
+    }
+
+    public function setPractising(?Practising $practising): self
+    {
+        $this->practising = $practising;
 
         return $this;
     }

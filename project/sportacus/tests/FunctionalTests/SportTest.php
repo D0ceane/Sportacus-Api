@@ -1,9 +1,9 @@
 <?php
 
 namespace FunctionalTests;
-use App\Entity\Sport;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
@@ -17,25 +17,33 @@ class SportTest extends \ApiPlatform\Symfony\Bundle\Test\ApiTestCase
      * @throws ServerExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
      */
-    public function testGetCollection(): void
+    public function testGetCollectionOfSport(): void
     {
-        $iri = $this->findIriBy(Sport::class, ['nameSport' => 'Consequatur quisquam recusandae asperiores.']);
-        static::createClient()->request('GET', $iri);
+        $response = static::createClient()->request('GET', '/api/sports');
+
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+
+        $this->assertCount(1, $response->toArray()['hydra:member']);
+
     }
 
     /**
      * @throws TransportExceptionInterface
      */
-    public function testCreateSportListing()
+    public function testCreateSport()
     {
-        $sport = self::createClient();
-        $sport->request('POST', '/api/created_sport', [
-            'headers' => ['Content-Type' => 'application/json'],
-            'json' => [],
-        ]);
+        self::createClient()->request('POST', '/api/sports', ['json' => [
+            'nameSport' => 'My name',
+            'typeSport' => 'collectif',
+            'playerMaxSport' => 28,
+            'createdAtSport' => '1985-07-31T00:00:00+00:00',
+            'updatedAtSport' => '1985-07-31T00:00:00+00:00'
+        ]]);
+
         $this->assertResponseStatusCodeSame(201);
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 }
