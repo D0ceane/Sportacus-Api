@@ -1,6 +1,6 @@
 <?php
 
-namespace FunctionalTests;
+namespace App\Tests\FunctionalTests;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
