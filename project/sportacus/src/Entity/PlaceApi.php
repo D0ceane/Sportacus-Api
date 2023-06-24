@@ -287,10 +287,6 @@ class PlaceApi
     ]
     private ?Practising $practising = null;
 
-    #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\ManyToOne(inversedBy: 'placeApi')]
-    private ?Status $status = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -1073,18 +1069,6 @@ class PlaceApi
     public function setPractising(?Practising $practising): self
     {
         $this->practising = $practising;
-
-        return $this;
-    }
-
-    public function getStatus(): ?Status
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?Status $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }
