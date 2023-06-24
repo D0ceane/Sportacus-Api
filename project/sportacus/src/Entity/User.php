@@ -8,7 +8,6 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
 use App\State\UserPasswordHasher;
 use Doctrine\DBAL\Types\Types;
@@ -21,20 +20,38 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new GetCollection(),
-        new Post(validationContext: ['groups' => ['Default', 'user:create']], processor: UserPasswordHasher::class),
-        new Get(),
-        new Put(processor: UserPasswordHasher::class),
-        new Patch(processor: UserPasswordHasher::class),
-        new Delete(),
+        new GetCollection(
+            uriTemplate: '/get-users',
+        ),
+        new Post(
+            uriTemplate: '/create-user',
+            validationContext: ['groups' => ['Default', 'user:create']],
+            processor: UserPasswordHasher::class
+        ),
+        new Get(
+            uriTemplate: '/get-user/{id}',
+            requirements: ['id' => '\d+']
+        ),
+        new Patch(
+            uriTemplate: '/update-user/{id}',
+            requirements: ['id' => '\d+'],
+            processor: UserPasswordHasher::class
+        ),
+        new Delete(
+            uriTemplate: 'delete-user/{id}',
+            requirements: ['id' => '\d+'],
+            security: "is_granted('ROLE_ADMIN')",
+            securityMessage: 'Accès refusé - Fonctionnalité réservée aux administrateurs',
+        ),
     ],
     normalizationContext: ['groups' => ['user:read']],
-    #denormalizationContext: ['groups' => ['user:update']],
+    denormalizationContext: ['groups' => ['user:update']],
 )]
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Cette adresse email est déjà utilisée')]
+#[UniqueEntity(fields: ['username'], message: 'Ce pseudo est déjà utilisé')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[Groups(['user:read'])]
@@ -68,7 +85,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $last_name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['user:create', 'user:update'])]
     private ?string $username = null;
 
     /**
