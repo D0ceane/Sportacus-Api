@@ -40,7 +40,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 'groups' => ['read:PlaceApi:item']
             ],
             denormalizationContext: [
-                'groups' => ['write:PlaceApi:item']
+                'groups' => ['write:PlaceApi:item', 'write:PlaceApi:collection']
             ]
         ),
         new Put(
@@ -69,7 +69,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ),
     ],
     paginationClientItemsPerPage: true,
-    paginationItemsPerPage: 1,
+    paginationItemsPerPage: 10,
     paginationMaximumItemsPerPage: 10
 )]
 #[ApiFilter(
@@ -152,7 +152,7 @@ class PlaceApi
     #[ORM\Column(type: Types::TEXT)]
     private ?string $typequipement = null;
 
-    #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
+    #[Groups(['read:PlaceApi:collection', 'write:PlaceApi:collection', 'read:PlaceApi:item'])]
     #[ORM\Column(name: 'famille', type: Types::TEXT)]
     private ?string $equipmentFamily = null;
 
@@ -280,12 +280,16 @@ class PlaceApi
     #[ORM\Column(name: 'caract167',type: Types::TEXT)]
     private ?string $typeOfSoil = null;
 
-    #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
+    #[Groups(['read:PlaceApi:collection', 'write:PlaceApi:collection'])]
     #[
         ORM\ManyToOne(inversedBy: 'placeApi'),
         ORM\JoinColumn(nullable: true)
     ]
     private ?Practising $practising = null;
+
+    #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
+    #[ORM\ManyToOne(inversedBy: 'placeApi')]
+    private ?Status $status = null;
 
     public function getId(): ?int
     {
@@ -1069,6 +1073,18 @@ class PlaceApi
     public function setPractising(?Practising $practising): self
     {
         $this->practising = $practising;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
