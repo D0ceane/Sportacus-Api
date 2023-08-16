@@ -117,7 +117,7 @@ class PlaceApi
     private ?string $accessibleInstallationToPeopleWithDisabilities = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract9', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract9', type: Types::TEXT , nullable: true)]
     private ?string $eatingIsPossible = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
@@ -133,15 +133,15 @@ class PlaceApi
     private ?string $numberOfParkingSpacesForPeopleWithDisabilities = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract16',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract16',type: Types::TEXT, nullable: true)]
     private ?string $specialInstallation = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract19',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract19',type: Types::TEXT, nullable: true)]
     private ?string $installationFeatureType = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract20',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract20',type: Types::TEXT, nullable: true)]
     private ?string $installationAccessibilityAccordingDisabilityType = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
@@ -153,7 +153,7 @@ class PlaceApi
     private ?string $typequipement = null;
 
     #[Groups(['read:PlaceApi:collection', 'write:PlaceApi:collection', 'read:PlaceApi:item'])]
-    #[ORM\Column(name: 'famille', type: Types::TEXT)]
+    #[ORM\Column(name: 'famille', type: Types::TEXT, nullable: true)]
     private ?string $equipmentFamily = null;
 
     #[Groups(['read:PlaceApi:collection', 'read:PlaceApi:item', 'write:PlaceApi:item'])]
@@ -165,7 +165,7 @@ class PlaceApi
     private ?string $coordgpsy = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract24',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract24',type: Types::TEXT, nullable: true)]
     private ?string $lightingOfTheEvolutionArea = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
@@ -173,111 +173,111 @@ class PlaceApi
     private ?string $freeAccessEquipment = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract26',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract26',type: Types::TEXT, nullable: true)]
     private ?string $informationFacilities = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract27',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract27',type: Types::TEXT, nullable: true)]
     private ?string $amenitiesForComfort = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract74',)]
+    #[ORM\Column(name: 'caract74', nullable: true)]
     private ?int $numberOfSportsLockerRooms = null;
 
     #[Groups(['read:PlaceApi:collection', 'read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract29',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract29',type: Types::TEXT, nullable: true)]
     private ?string $orderToOpenToThePublic = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract33',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract33',type: Types::TEXT, nullable: true)]
     private ?string $SeasonalOpeningOnly = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract34',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract34',type: Types::TEXT, nullable: true)]
     private ?string $presenceOfShower = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract35',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract35',type: Types::TEXT, nullable: true)]
     private ?string $presenceOfSanitary = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract47', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract47', type: Types::TEXT, nullable: true)]
     private ?string $complementaryArrangementsOfTheBasins = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract49', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract49', type: Types::TEXT, nullable: true)]
     private ?string $partialOrTotalAccessibilityForPeopleReducedMobility = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract53', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract53', type: Types::TEXT, nullable: true)]
     private ?string $accessibilityForPeopleReducedMobilityToShowers = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract54', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract54', type: Types::TEXT, nullable: true)]
     private ?string $accessibilityForPeopleReducedMobilityToSanitaryFacilities = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract55', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract55', type: Types::TEXT, nullable: true)]
     private ?string $accessibilityToTheStandsForPeopleReducedMobility = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract56', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract56', type: Types::TEXT, nullable: true)]
     private ?string $accessibilityToPersonsReducedMobilityInLockerRooms = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract57',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract57',type: Types::TEXT, nullable: true)]
     private ?string $partialOrTotalAccessibilityForPeopleSensoryDisabilities = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract60', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract60', type: Types::TEXT, nullable: true)]
     private ?string $accessibilityForPeopleSensoryDisabilitiesToSanitaryFacilities = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract62', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract62', type: Types::TEXT, nullable: true)]
     private ?string $accessibilityToTheStandsForPeopleSensoryDisabilities = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract63', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract63', type: Types::TEXT, nullable: true)]
     private ?string $accessibilityToPersonsSensoryDisabilitiesInLockerRooms = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract78',type: Types::DECIMAL, precision: 10, scale: 3)]
+    #[ORM\Column(name: 'caract78',type: Types::DECIMAL, precision: 10, scale: 3, nullable: true)]
     private ?string $lengthOfTheBasin = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract79',type: Types::DECIMAL, precision: 10, scale: 3)]
+    #[ORM\Column(name: 'caract79',type: Types::DECIMAL, precision: 10, scale: 3, nullable: true)]
     private ?string $widthOfTheBasin = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract80',type: Types::DECIMAL, precision: 10, scale: 3)]
+    #[ORM\Column(name: 'caract80',type: Types::DECIMAL, precision: 10, scale: 3, nullable: true)]
     private ?string $basinSurface = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract81',type: Types::DECIMAL, precision: 10, scale: 3)]
+    #[ORM\Column(name: 'caract81',type: Types::DECIMAL, precision: 10, scale: 3, nullable: true)]
     private ?string $minimumBasinDepth = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract82',type: Types::DECIMAL, precision: 10, scale: 3)]
+    #[ORM\Column(name: 'caract82',type: Types::DECIMAL, precision: 10, scale: 3, nullable: true)]
     private ?string $maximumBasinDepth = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract93',type: Types::DECIMAL, precision: 10, scale: 3)]
+    #[ORM\Column(name: 'caract93',type: Types::DECIMAL, precision: 10, scale: 3, nullable: true)]
     private ?string $trackLength = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract155',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract155',type: Types::TEXT, nullable: true)]
     private ?string $typeOfUse = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract116',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract116',type: Types::TEXT, nullable: true)]
     private ?string $nameOfBuilding = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract159', type: Types::TEXT)]
+    #[ORM\Column(name: 'caract159', type: Types::TEXT, nullable: true)]
     private ?string $typeOfUsers = null;
 
     #[Groups(['read:PlaceApi:item', 'write:PlaceApi:item'])]
-    #[ORM\Column(name: 'caract167',type: Types::TEXT)]
+    #[ORM\Column(name: 'caract167',type: Types::TEXT, nullable: true)]
     private ?string $typeOfSoil = null;
 
     #[Groups(['read:PlaceApi:collection', 'write:PlaceApi:collection'])]
