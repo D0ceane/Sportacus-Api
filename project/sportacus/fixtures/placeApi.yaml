@@ -14,3 +14,6 @@ App\Entity\PlaceApi:
     coordgpsy: <numberBetween(1, 50)>
     freeAccessEquipment: <numberBetween(0, 1)>
     orderToOpenToThePublic: <numberBetween(0, 1)>
+    inseeCode: <numberBetween(10000, 99000)>
+    eatingIsPossible: <sentence(2)>
+    typequipement: <sentence(2)>
